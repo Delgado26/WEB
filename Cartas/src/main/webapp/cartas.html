@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script>
+            function accion(X) {
+                var arrayGuardado = localStorage.getItem("miArray");
+                var miArray = JSON.parse(arrayGuardado);
+
+                miArray.forEach(function (valor, indice) {
+
+                    if (valor.carta === X) {
+                        miArray[indice].cantidad = valor.cantidad + 1;
+                        localStorage.setItem('miArray', JSON.stringify(miArray));
+                        llenar();
+
+                    } else {
+                        switch (X) {
+                            case "As":
+                                document.getElementById("carta").value = "As de Diamantes";
+                                break;
+                            case "1":
+                                document.getElementById("carta").value = "Dos de Diamantes";
+                                break;
+                            case "2":
+                                document.getElementById("carta").value = "Tres de Corazones";
+                                break;
+                            case "3":
+                                document.getElementById("carta").value = "Cuatro de Corazones";
+                                break;
+                            case "4":
+                                document.getElementById("carta").value = "Cinco de Corazones";
+                                break;
+                            case "5":
+                                document.getElementById("carta").value = "Seis de Treboles";
+                                break;
+                            case "6":
+                                document.getElementById("carta").value = "Siete de Diamantes";
+                                break;
+                            case "7":
+                                document.getElementById("carta").value = "Ocho de Treboles";
+                                break;
+                            case "8":
+                                document.getElementById("carta").value = "Nueve de Diamantes";
+                                break;
+                            case "9":
+                                document.getElementById("carta").value = "Diez de Corazones";
+                                break;
+                            case "10":
+                                document.getElementById("carta").value = "J de Treboles";
+                                break;
+                            case "11":
+                                document.getElementById("carta").value = "Q de Picas";
+                                break;
+                            case "12":
+                                document.getElementById("carta").value = "K de Diamantes";
+                                break;
+                        }
+
+                        document.getElementById("numero").value = miArray.length + 1;
+
+                        document.getElementById("dato").value = X;
+                    }
+                });
+            }
+
+            function cargarArchivo() {
+                localStorage.setItem('miArray', null);
+                document.getElementById("numero").value = "";
+                document.getElementById("carta").value = "";
+                document.getElementById("dato").value = "";
+                
+                
+                var fileInput = document.getElementById('fileInput');
+                var file = fileInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    var contenido = event.target.result;
+
+                    try {
+                        var arrayDesdeJSON = JSON.parse(contenido);
+                        localStorage.setItem('miArray', JSON.stringify(arrayDesdeJSON));
+                        alert('Archivo JSON cargado');
+                        llenar();
+
+                    } catch (error) {
+                        alert('Error al cargar el archivo JSON: ' + error);
+
+                    }
+                };
+                reader.readAsText(file);
+            }
+
+            function verificar() {
+                var arrayGuardado = localStorage.getItem("miArray");
+                var miArray = JSON.parse(arrayGuardado);
+                miArray.forEach(function (valor, indice) {
+                    window.alert("carta: " + valor.carta + " cantidad: " + valor.cantidad);
+                });
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <table>
+            <tr>
+                <td>
+                    <img src="img/logo.png" width="300" height="150" >
+                </td>
+                <td>
+                </td>
+            <tr>
+
+            <tr>
+                <th>
+                    <input type="file" id="fileInput" accept=".json">
+                    <button onclick="cargarArchivo()">Cargar JSON</button>
+                    <button onclick="verificar()"  style="display: none;">verificar</button>
+
+                    <table>
+                        <tr>
+                            <th>
+                                <button  onclick="accion(this.value)" value="As">
+                                    <img src="img/1.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="1">
+                                    <img src="img/2.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="2">
+                                    <img src="img/3.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="3">
+                                    <img src="img/4.png" width="70" height="100" >
+                                </button>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                <button  onclick="accion(this.value)" value="4">
+                                    <img src="img/5.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="5">
+                                    <img src="img/6.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="6">
+                                    <img src="img/7.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="7">
+                                    <img src="img/8.png" width="70" height="100" >
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button  onclick="accion(this.value)" value="8">
+                                    <img src="img/9.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="9">
+                                    <img src="img/10.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="10">
+                                    <img src="img/11.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+                                <button  onclick="accion(this.value)" value="11">
+                                    <img src="img/12.png" width="70" height="100" >
+                                </button>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <button  onclick="accion(this.value)" value="12">
+                                    <img src="img/13.png" width="70" height="100" >
+                                </button>
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+
+                            </th>
+                            <th>
+
+                            </th>
+
+                        </tr>
+                    </table>
+
+                </th>
+                <th>
+
+                    <table style="border-style:solid;border-width:1px;">
+                        <caption>Registro cartas</caption>
+                        
+                        <tr>
+                            <th>
+                                <label  style="width:10em; text-align:right;">Numero: </label>
+                                <br>
+                                <br>
+                            </th>
+                            <th>
+                                <input readonly type="text" name="numero" id="numero" value = ""  >
+                                <br>
+                                <br>
+                            </th>
+                        </tr>
+
+                        <br>
+
+                        <tr>
+                            <th>
+                                <label style="width:10em; text-align:right;">Carta: </label>
+                                <br>
+                                <br>
+                            </th>
+                            <th>
+                                <input readonly type="text" name="carta" id="carta" value = ""  >
+                                <input type="text" name="dato" id="dato" value = ""  style="display: none;" >
+                                <br>
+                                <br>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th>
+                                <button  onclick="nuevo()" >
+                                    Guardar
+                                </button>
+                            </th>
+                            <th>
+                            </th>
+                        </tr>
+
+                    </table>
+
+                    <br>
+                    <br>
+
+                    <table id="miTabla" border="1">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Carta</th>
+                                <th>Cant</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </th>
+            </tr>
+        </table>
+
+        <script>
+            function llenar() {
+                var tabla = document.getElementById("miTabla");
+                var tbody = tabla.getElementsByTagName("tbody")[0];
+
+                tbody.innerHTML = '';
+                var arrayGuardado = localStorage.getItem("miArray");
+
+                if (arrayGuardado !== null) {
+
+                    var miArray = JSON.parse(arrayGuardado);
+                    var tabla = document.getElementById("miTabla");
+                    var tbody = tabla.getElementsByTagName("tbody")[0];
+
+                    miArray.forEach(function (objeto) {
+
+                        var fila = document.createElement("tr");
+
+                        var numeros = document.createElement("td");
+                        numeros.textContent = objeto.numero;
+                        fila.appendChild(numeros);
+
+                        var cartas = document.createElement("td");
+
+                        switch (objeto.carta) {
+                            case "As":
+                                cartas.textContent = "As de Diamantes";
+                                break;
+                            case "1":
+                                cartas.textContent = "Dos de Diamantes";
+                                break;
+                            case "2":
+                                cartas.textContent = "Tres de Corazones";
+                                break;
+                            case "3":
+                                cartas.textContent = "Cuatro de Corazones";
+                                break;
+                            case "4":
+                                cartas.textContent = "Cinco de Corazones";
+                                break;
+                            case "5":
+                                cartas.textContent = "Seis de Treboles";
+                                break;
+                            case "6":
+                                cartas.textContent = "Siete de Diamantes";
+                                break;
+                            case "7":
+                                cartas.textContent = "Ocho de Treboles";
+                                break;
+                            case "8":
+                                cartas.textContent = "Nueve de Diamantes";
+                                break;
+                            case "9":
+                                cartas.textContent = "Diez de Corazones";
+                                break;
+                            case "10":
+                                cartas.textContent = "J de Treboles";
+                                break;
+                            case "11":
+                                cartas.textContent = "Q de Picas";
+                                break;
+                           case "12":
+                                cartas.textContent = "K de Diamantes";
+                                break;
+                        }
+
+                        fila.appendChild(cartas);
+
+                        var cantidades = document.createElement("td");
+                        cantidades.textContent = objeto.cantidad;
+                        fila.appendChild(cantidades);
+                        tbody.appendChild(fila);
+                    });
+                } else {
+                    console.log("No se encontró ningún array en el localStorage.");
+                }
+            }
+
+            function nuevo() {
+                
+                if (document.getElementById("numero").value !== "" && document.getElementById("dato").value !== ""){
+                
+                var miArray = JSON.parse(localStorage.getItem("miArray"));
+
+                var nuevoObjeto = {
+                    numero: document.getElementById("numero").value,
+                    carta: document.getElementById("dato").value,
+                    cantidad: 0
+                };
+
+                miArray.push(nuevoObjeto);
+
+                localStorage.setItem("miArray", JSON.stringify(miArray));
+
+                llenar();
+            }}
+        </script>
+    </body>
+</html>

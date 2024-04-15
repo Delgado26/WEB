@@ -1,293 +1,99 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
-        <script>
-
-
-            function accion(X) {
-
-                //window.alert(X);
-                var arrayGuardado = localStorage.getItem("miArray");
-                var miArray = JSON.parse(arrayGuardado);
-
-                miArray.forEach(function (valor, indice) {
-                    //window.alert("Posición " + indice + ": " + valor.numero + "carta: " + valor.carta);
-
-                    //window.alert(valor.carta + " " + X);
-
-                    if (valor.carta === X) {
-                        //window.alert("si es");
-                        miArray[indice].cantidad = valor.cantidad + 1;
-                        localStorage.setItem('miArray', JSON.stringify(miArray));
-                        llenar();
-                    }
-
-
-
-                });
-
-            }
-
-
-            function cargarArchivo() {
-                localStorage.setItem('miArray', null);
-                var fileInput = document.getElementById('fileInput');
-                var file = fileInput.files[0];
-                var reader = new FileReader();
-
-                reader.onload = function (event) {
-                    var contenido = event.target.result;
-
-                    try {
-                        var arrayDesdeJSON = JSON.parse(contenido);
-                        localStorage.setItem('miArray', JSON.stringify(arrayDesdeJSON));
-                        alert('Archivo JSON cargado');
-                        llenar();
-
-                    } catch (error) {
-                        alert('Error al cargar el archivo JSON: ' + error);
-                    }
-                };
-
-
-
-                reader.readAsText(file);
-
-
-
-
-            }
-
-
-            function verificar() {
-                var arrayGuardado = localStorage.getItem("miArray");
-                var miArray = JSON.parse(arrayGuardado);
-                miArray.forEach(function (valor, indice) {
-                    window.alert("carta: " + valor.carta + " cantidad: " + valor.cantidad);
-                });
-            }
-
-        </script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Inicio de Sesión</title>
 
     </head>
     <body>
 
-        <input type="file" id="fileInput">
-        <button onclick="cargarArchivo()">Cargar JSON</button>
+        <div class="login-container">
 
 
-        <button onclick="verificar()">verificar</button>
 
-        <table>
-            <tr>
+            <img src="img/logo.png" width="300" height="150" >
 
-                <th>
-                    <button  onclick="accion(this.value)" value="As">
-                        <img src="img/1.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="1">
-                        <img src="img/2.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="2">
-                        <img src="img/3.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="3">
-                        <img src="img/4.png" width="70" height="100" >
-                    </button>
-                </th>
-            </tr>
 
-            <tr>
-                <th>
-                    <button  onclick="accion(this.value)" value="4">
-                        <img src="img/5.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="5">
-                        <img src="img/6.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="6">
-                        <img src="img/7.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="7">
-                        <img src="img/8.png" width="70" height="100" >
-                    </button>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <button  onclick="accion(this.value)" value="8">
-                        <img src="img/9.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="9">
-                        <img src="img/10.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="10">
-                        <img src="img/11.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
-                    <button  onclick="accion(this.value)" value="11">
-                        <img src="img/12.png" width="70" height="100" >
-                    </button>
-                </th>
-            </tr>
-            <tr>
-                <th>
-                    <button  onclick="accion(this.value)" value="12">
-                        <img src="img/13.png" width="70" height="100" >
-                    </button>
-                </th>
-                <th>
+            <form class="login-form" onsubmit="return validarFormulario()"    method="post" action="cartas.html">
 
-                </th>
-                <th>
 
-                </th>
-                <th>
+                <table style="border-style:solid;border-width:1px;">
 
-                </th>
 
-            </tr>
-        </table>
+                    <tr >
+                        <th>
+                            <div style="border-style:solid;border-width:1px;">
+                            <label  style="width:10em; text-align:right;">Inicio de Sesión </label>
+                            </div>
+                        <th>
+                    </tr>
+                    
+                    
+                    
+                    <tr>
+                        <th>
+                            <label  style="width:10em; text-align:right;">Usuario </label>
+                            <br>
+                            <br>
+                        </th>
+                        <th>
+                            <input  type="text" id="codigo" placeholder="" required  >
+                            <br>
+                            <br>
+                        </th>
+                    </tr>
 
-        <div id="box">
+                    <br>
+
+                    <tr>
+                        <th>
+                            <label style="width:10em; text-align:right;">Contraseña </label>
+                            <br>
+                            <br>
+                        </th>
+                        <th>
+                            <input  type="password" id="contrasena" placeholder="" required  >
+
+                            <br>
+                            <br>
+                        </th>
+                    </tr>
+
+
+
+                    <tr>
+                        <th>
+                            <button type="submit">Ingresar</button>
+                        </th>
+                        <th>
+                        </th>
+                    </tr>
+
+                </table>
+
+
+
+
+            </form>
         </div>
 
-
-
-        <table id="miTabla" border="1">
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Carta</th>
-                    <th>Cant</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-
         <script>
-            function llenar() {
-                var tabla = document.getElementById("miTabla");
-                var tbody = tabla.getElementsByTagName("tbody")[0];
+            function validarFormulario() {
+                var codigo = document.getElementById("codigo").value;
+                var contrasena = document.getElementById("contrasena").value;
 
-
-                tbody.innerHTML = '';
-                var arrayGuardado = localStorage.getItem("miArray");
-
-                if (arrayGuardado !== null) {
-
-                    var miArray = JSON.parse(arrayGuardado);
-
-
-                    var tabla = document.getElementById("miTabla");
-                    var tbody = tabla.getElementsByTagName("tbody")[0];
-
-
-                    miArray.forEach(function (objeto) {
-
-                        var fila = document.createElement("tr");
-
-
-                        var numeros = document.createElement("td");
-                        numeros.textContent = objeto.numero;
-                        fila.appendChild(numeros);
-
-                        var cartas = document.createElement("td");
-                        //cartas.textContent = objeto.carta;
-                        
-                        switch (objeto.carta) {
-                        case "As":
-                        cartas.textContent = "As de Diamantes";
-                        break;
-                        case "1":
-                        cartas.textContent = "Dos de Diamantes";
-                        break;
-                        
-                        case "2":
-                        cartas.textContent = "Tres de Corazones";
-                        break;
-                        
-                        case "3":
-                        cartas.textContent = "Cuatro de Corazones";
-                        break;
-                        
-                        case "4":
-                        cartas.textContent = "Cinco de Corazones";
-                        break;
-                        
-                        case "5":
-                        cartas.textContent = "Seis de Treboles";
-                        break;
-                        
-                        case "6":
-                        cartas.textContent = "Siete de Diamantes";
-                        break;
-                        
-                        case "7":
-                        cartas.textContent = "Ocho de Treboles";
-                        break;
-                        
-                        case "8":
-                        cartas.textContent = "Nueve de Diamantes";
-                        break;
-                        
-                        case "9":
-                        cartas.textContent = "Diez de Corazones";
-                        break;
-                        
-                        case "10":
-                        cartas.textContent = "J de Treboles";
-                        break;
-                        
-                        case "11":
-                        cartas.textContent = "Q de Picas";
-                        break;
-                        
-                        default:
-                        cartas.textContent = "K de Diamantes";
-                        break;
-                        
-                        }
-                        
-                        fila.appendChild(cartas);
-
-                        var cantidades = document.createElement("td");
-                        cantidades.textContent = objeto.cantidad;
-                        fila.appendChild(cantidades);
-
-
-                        tbody.appendChild(fila);
-                    });
+                // Validar el código y la contraseña (aquí puedes agregar tu lógica de validación)
+                if (codigo === "admin" && contrasena === "1234") {
+                    alert("Inicio de sesión exitoso");
+                    window.location.href = "cartas.html";
+                    return true;
                 } else {
-                    console.log("No se encontró ningún array en el localStorage.");
+                    alert("Usuario o contraseña incorrectos");
+                    return false;
                 }
             }
         </script>
-
-
-
-
 
     </body>
 </html>
