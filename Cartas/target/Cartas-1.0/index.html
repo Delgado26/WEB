@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Start Page</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+        <script>
+
+
+            function accion(X) {
+
+                //window.alert(X);
+                var arrayGuardado = localStorage.getItem("miArray");
+                var miArray = JSON.parse(arrayGuardado);
+
+                miArray.forEach(function (valor, indice) {
+                    //window.alert("Posición " + indice + ": " + valor.numero + "carta: " + valor.carta);
+
+                    //window.alert(valor.carta + " " + X);
+
+                    if (valor.carta === X) {
+                        //window.alert("si es");
+                        miArray[indice].cantidad = valor.cantidad + 1;
+                        localStorage.setItem('miArray', JSON.stringify(miArray));
+                        llenar();
+                    }
+
+
+
+                });
+
+            }
+
+
+            function cargarArchivo() {
+                localStorage.setItem('miArray', null);
+                var fileInput = document.getElementById('fileInput');
+                var file = fileInput.files[0];
+                var reader = new FileReader();
+
+                reader.onload = function (event) {
+                    var contenido = event.target.result;
+
+                    try {
+                        var arrayDesdeJSON = JSON.parse(contenido);
+                        localStorage.setItem('miArray', JSON.stringify(arrayDesdeJSON));
+                        alert('Archivo JSON cargado');
+                        llenar();
+
+                    } catch (error) {
+                        alert('Error al cargar el archivo JSON: ' + error);
+                    }
+                };
+
+
+
+                reader.readAsText(file);
+
+
+
+
+            }
+
+
+            function verificar() {
+                var arrayGuardado = localStorage.getItem("miArray");
+                var miArray = JSON.parse(arrayGuardado);
+                miArray.forEach(function (valor, indice) {
+                    window.alert("carta: " + valor.carta + " cantidad: " + valor.cantidad);
+                });
+            }
+
+        </script>
+
+    </head>
+    <body>
+
+        <input type="file" id="fileInput">
+        <button onclick="cargarArchivo()">Cargar JSON</button>
+
+
+        <button onclick="verificar()">verificar</button>
+
+        <table>
+            <tr>
+
+                <th>
+                    <button  onclick="accion(this.value)" value="As">
+                        <img src="img/1.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="1">
+                        <img src="img/2.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="2">
+                        <img src="img/3.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="3">
+                        <img src="img/4.png" width="70" height="100" >
+                    </button>
+                </th>
+            </tr>
+
+            <tr>
+                <th>
+                    <button  onclick="accion(this.value)" value="4">
+                        <img src="img/5.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="5">
+                        <img src="img/6.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="6">
+                        <img src="img/7.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="7">
+                        <img src="img/8.png" width="70" height="100" >
+                    </button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <button  onclick="accion(this.value)" value="8">
+                        <img src="img/9.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="9">
+                        <img src="img/10.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="10">
+                        <img src="img/11.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+                    <button  onclick="accion(this.value)" value="11">
+                        <img src="img/12.png" width="70" height="100" >
+                    </button>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <button  onclick="accion(this.value)" value="12">
+                        <img src="img/13.png" width="70" height="100" >
+                    </button>
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+                <th>
+
+                </th>
+
+            </tr>
+        </table>
+
+        <div id="box">
+        </div>
+
+
+
+        <table id="miTabla" border="1">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Carta</th>
+                    <th>Cant</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <script>
+            function llenar() {
+                var tabla = document.getElementById("miTabla");
+                var tbody = tabla.getElementsByTagName("tbody")[0];
+
+
+                tbody.innerHTML = '';
+                var arrayGuardado = localStorage.getItem("miArray");
+
+                if (arrayGuardado !== null) {
+
+                    var miArray = JSON.parse(arrayGuardado);
+
+
+                    var tabla = document.getElementById("miTabla");
+                    var tbody = tabla.getElementsByTagName("tbody")[0];
+
+
+                    miArray.forEach(function (objeto) {
+
+                        var fila = document.createElement("tr");
+
+
+                        var numeros = document.createElement("td");
+                        numeros.textContent = objeto.numero;
+                        fila.appendChild(numeros);
+
+                        var cartas = document.createElement("td");
+                        //cartas.textContent = objeto.carta;
+                        
+                        switch (objeto.carta) {
+                        case "As":
+                        cartas.textContent = "As de Diamantes";
+                        break;
+                        case "1":
+                        cartas.textContent = "Dos de Diamantes";
+                        break;
+                        
+                        case "2":
+                        cartas.textContent = "Tres de Corazones";
+                        break;
+                        
+                        case "3":
+                        cartas.textContent = "Cuatro de Corazones";
+                        break;
+                        
+                        case "4":
+                        cartas.textContent = "Cinco de Corazones";
+                        break;
+                        
+                        case "5":
+                        cartas.textContent = "Seis de Treboles";
+                        break;
+                        
+                        case "6":
+                        cartas.textContent = "Siete de Diamantes";
+                        break;
+                        
+                        case "7":
+                        cartas.textContent = "Ocho de Treboles";
+                        break;
+                        
+                        case "8":
+                        cartas.textContent = "Nueve de Diamantes";
+                        break;
+                        
+                        case "9":
+                        cartas.textContent = "Diez de Corazones";
+                        break;
+                        
+                        case "10":
+                        cartas.textContent = "J de Treboles";
+                        break;
+                        
+                        case "11":
+                        cartas.textContent = "Q de Picas";
+                        break;
+                        
+                        default:
+                        cartas.textContent = "K de Diamantes";
+                        break;
+                        
+                        }
+                        
+                        fila.appendChild(cartas);
+
+                        var cantidades = document.createElement("td");
+                        cantidades.textContent = objeto.cantidad;
+                        fila.appendChild(cantidades);
+
+
+                        tbody.appendChild(fila);
+                    });
+                } else {
+                    console.log("No se encontró ningún array en el localStorage.");
+                }
+            }
+        </script>
+
+
+
+
+
+    </body>
+</html>

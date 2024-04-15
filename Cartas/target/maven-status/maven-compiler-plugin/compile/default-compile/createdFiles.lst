@@ -1,0 +1,8 @@
+base\entidades\Usuario.class
+base\JakartaRestConfiguration.class
+base\conexion\Conexion.class
+base\negocio\UsuarioNegocio.class
+base\registro\UsuarioRegistro.class
+base\resources\JakartaEE8Resource.class
+base\fachada\UsuarioFachada.class
+base\entidades\Profesor.class
